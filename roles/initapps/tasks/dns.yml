@@ -1,0 +1,6 @@
+---
+- name: "Domain {{ domain.key }}"
+  include_tasks: dns_records.yml
+  with_dict: "{{ site_dns_domains }}"
+  loop_control:
+    loop_var: domain

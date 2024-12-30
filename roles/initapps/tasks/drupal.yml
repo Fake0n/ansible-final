@@ -1,0 +1,15 @@
+---
+- name: "{{ site_domain}} : setup drupal"
+  include_role:
+    name: drupal
+  vars:
+    drupal_domain: "{{ site_domain }}"
+    drupal_site_name: "{{ site_domain }}"
+    drupal_deploy_dir: "{{ site_root }}" # drupal 8
+    drupal_core_path: "{{ site_root_public }}" # для drupal 8 тут надо {{ site_root }}/web
+    drupal_core_owner: "{{ site_user }}"
+    drupal_db_user: "{{ site_mysql_user }}"
+    drupal_db_password: "{{ site_mysql_password }}"
+    drupal_db_name: "{{ site_mysql_db }}"
+    drupal_db_backend: mysqli
+    drupal_db_host: "{{ site_mysql_host }}"

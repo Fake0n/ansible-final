@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Stanislav Popov
+  company: Viasite
+  description: Install site to server, in place of https://github.com/viasite/site-setup
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+  galaxy_tags:
+    - deployment
+    - web
+dependencies: []

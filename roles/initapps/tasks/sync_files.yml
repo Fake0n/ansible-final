@@ -1,0 +1,85 @@
+---
+- name: "{{ site_domain}} : Check if {{ site_root }} exists"
+  stat: "path={{ site_root }}"
+  register: site_register_site_root
+  ignore_errors: True
+
+- name: "{{ site_domain}} : Define site_root_exists"
+  set_fact:
+    site_root_exists: "{{ site_register_site_root.stat.exists|default(false) }}"
+
+- name: "{{ site_domain}} : Check if {{ site_root }} empty"
+  command: "find {{ site_root }} -type f -print -quit"
+  changed_when: False
+  register: site_register_site_root_files
+  when: site_root_exists
+
+- name: "{{ site_domain}} : Define site_root_empty"
+  set_fact:
+    site_root_empty: "{{ site_register_site_root_files.stdout == '' }}"
+  when: site_root_exists
+
+- name: "{{ site_domain}} : Redefine site_sync_files"
+  set_fact:
+    site_sync_files: "{{ not site_root_exists or site_root_empty or site_sync_files_force | default(false) }}"
+
+- name: "{{ site_domain}} : Ensure ~/.ssh exists (rsync remote)"
+  file:
+    name: "~{{ ansible_user_id }}/.ssh"
+    state: directory
+  when: site_src.host is defined and site_sync_files
+
+- name: "{{ site_domain}} : Get public key of remote server {{ site_src.host }} (rsync remote)"
+  command: ssh-keyscan -H "{{ site_src.host }}"
+  register: site_src_host_key
+  when: site_src.host is defined and site_sync_files
+  changed_when: False
+
+- name: "{{ site_domain}} : Ensure host {{ site_src.host }} known (rsync remote)"
+  known_hosts:
+    name: "{{ site_src.host }}"
+    key: "{{ site_src_host_key.stdout }}"
+    state: present
+  changed_when: False
+  when: site_src.host is defined and site_sync_files
+
+- name: "{{ site_domain}} : Check ssh connection (rsync remote)"
+  command: "ssh -o BatchMode=yes {{ site_src.user }}@{{ site_src.host }} -v exit"
+  changed_when: False
+  when: site_src.host is defined and site_sync_files
+
+- name: rsync-exclude.txt for rsync
+  template:
+    src: sync/rsync-exclude.txt.j2
+    dest: /tmp/ansible-role-site-rsync-exclude.txt
+  changed_when: False
+  when: site_sync_files
+
+- name: "{{ site_domain}} : Sync files from {{ site_src.user }}@{{ site_src.host }}:{{ site_src.path }} with rsync (remote)"
+  command: |
+    rsync --archive --delete --exclude-from /tmp/ansible-role-site-rsync-exclude.txt \
+    "{{ site_src.user }}@{{ site_src.host }}:{{ site_src.path }}/" \
+    "{{ site_root }}"
+  #changed_when: false
+  when: site_src.user is defined and site_src.host is defined and site_src.path is defined and site_sync_files
+  tags: skip_ansible_lint
+
+- name: Sync files with rsync (local)
+  command: rsync --archive --delete --exclude-from /tmp/ansible-role-site-rsync-exclude.txt "{{ site_src.path }}/" "{{ site_root }}"
+  #changed_when: false
+  when: site_src.path is defined and site_src.host is not defined and site_sync_files
+  tags: skip_ansible_lint
+
+#- name: "{{ site_domain}} : chown {{ site_user }}:{{ site_user }} {{ site_root }} directory"
+#  file:
+#    path: "{{ site_root }}"
+#    owner: "{{ site_user }}"
+#    group: "{{ site_user }}"
+#    recurse: yes
+#  #changed_when: false
+
+# file: owner module breaks on nikomreklama.ru, viasite.ru sync
+- name: "{{ site_domain}} : chown {{ site_user }}:{{ site_user }} and chmod 755 {{ site_root }} directory"
+  shell: 'chown -R "{{ site_user }}":"{{ site_user }}" "{{ site_root }}" && chmod 755 "{{ site_root }}"'
+  changed_when: False
+  tags: skip_ansible_lint

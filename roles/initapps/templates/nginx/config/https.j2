@@ -1,0 +1,66 @@
+# {{ ansible_managed }}
+
+server {
+  # Redirect https to main domain
+  listen 443 ssl{% if site_nginx_http2 %} http2{% endif %};
+  server_name {{ site_domains_redirected_compiled | join(' ') }}{% if site_ssl_redirect_main_domain %} {{ site_domains_secondary | join(' ') }}{% endif %};
+  ssl_certificate {{ site_ssl_certificate }};
+  ssl_certificate_key {{ site_ssl_certificate_key }};
+  return 301 https://{{ site_domain }}$request_uri;
+}
+
+{% if site_ssl_redirect_main_domain %}
+server {
+  # Redirect http to main domain
+  listen 80;
+  server_name {{ site_domain }} {{ site_domains_redirected_compiled | join(' ') }} {{ site_domains_secondary | join(' ') }};
+  return 301 https://{{ site_domain }}$request_uri;
+}
+
+{% else %}
+server {
+  # Redirect to main domain
+  listen 80;
+  server_name {{ site_domains_redirected_compiled | join(' ') }};
+  return 301 https://{{ site_domain }}$request_uri;
+}
+
+server {
+  listen 80;
+  server_name {{ site_domain }} {{ site_domains_secondary | join(' ') }};
+  root {{ site_root_public }};
+  index index.php index.html;
+
+  # site_nginx_custom_server_before
+  {{ site_nginx_custom_server_before | default('') | indent(2) }}
+
+  # site_nginx_engine_server
+  {{ site_nginx_engine_server | indent(2) }}
+
+  # site_nginx_custom_server
+  {{ site_nginx_custom_server | default('') | indent(2) }}
+}
+{% endif %}
+
+server {
+  listen 443 ssl{% if site_nginx_http2 %} http2{% endif %};
+  server_name {{ site_domain }}{% if not site_ssl_redirect_main_domain %} {{ site_domains_secondary | join(' ') }}{% endif %};
+  root {{ site_root_public }};
+  index index.php index.html;
+
+  ssl_certificate {{ site_ssl_certificate }};
+  ssl_certificate_key {{ site_ssl_certificate_key }};
+  {% if site_ssl_hsts %}add_header Strict-Transport-Security "max-age=15768000"; # HSTS{% endif %}
+
+  # site_nginx_custom_server_before
+  {{ site_nginx_custom_server_before | default('') | indent(2) }}
+
+  # site_nginx_engine_server
+  {{ site_nginx_engine_server | indent(2) }}
+
+  # site_nginx_custom_server
+  {{ site_nginx_custom_server | default('') | indent(2) }}
+}
+
+# site_nginx_custom_http
+{{ site_nginx_custom_http }}

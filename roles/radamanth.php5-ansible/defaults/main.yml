@@ -1,0 +1,7 @@
+---
+# defaults file for php5-ansible
+
+php_post_max_size: 16M
+php_max_execution_time: 300
+php_max_input_time: 300
+php_time_zone: "Europe/Paris"
