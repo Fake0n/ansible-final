@@ -2,6 +2,6 @@ all:
   children:
     webservers:
       web01:
-	      ansible_host: 192.168.2.25
+	      ansible_host: 192.168.2.26
 	      ansible_user: user
 	      ansible_password: babaika
