@@ -1,6 +1,0 @@
----
-- hosts: all
-
-  roles:
-    - { role: ".", vars_file: sites/site1.yml }
-    - { role: ".", vars_file: sites/site2.yml }

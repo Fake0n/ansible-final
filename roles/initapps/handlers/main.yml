@@ -1,5 +1,0 @@
----
-- name: reload php-fpm
-  service:
-    name: "{{ site_php_fpm_service_name }}"
-    state: reloaded
