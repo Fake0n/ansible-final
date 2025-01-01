@@ -1,0 +1,22 @@
+---
+- name: Nginx installation
+  tasks:
+
+    - name: Install Nginx on Ubuntu latest version
+      become: true
+      # noqa package-latest
+      ansible.builtin.apt:
+        name: nginx
+        state: latest
+        update_cache: true
+      when: nginx_ubuntu_version == ""
+
+    - name: Install Nginx on Ubuntu sepsific version {{ nginx_ubuntu_version }}
+      become: true
+      ansible.builtin.apt:
+        name: nginx={{ nginx_ubuntu_version }}
+        state: present
+        allow_downgrade: true
+        update_cache: true
+      when: nginx_ubuntu_version != ""
+
