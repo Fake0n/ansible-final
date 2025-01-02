@@ -1,0 +1,7 @@
+---
+- name: Install php
+  ansible.builtin.apt:
+     name: php-{{ php_version }}
+     update_cache: true
+     state: present
+

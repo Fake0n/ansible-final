@@ -5,3 +5,4 @@
     nginx_ubuntu_version: ""
   roles:
     - nginx
+    - php
