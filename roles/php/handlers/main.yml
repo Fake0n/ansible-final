@@ -1,0 +1,9 @@
+- name: start php
+  ansible.builtin.service:
+    name: php
+    state: started
+
+- name: restart php
+  ansible.builtin.service:
+    name: php
+    state: restarted

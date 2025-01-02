@@ -9,7 +9,7 @@
   notify:
     - start nginx
     
-- name: Install Nginx on Ubuntu sepsific version
+- name: Install Nginx on Ubuntu spesific version
   become: true
   ansible.builtin.apt:
     name: "nginx={{ nginx_ubuntu_version }}"

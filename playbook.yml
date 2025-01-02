@@ -3,6 +3,7 @@
   hosts: webservers
   vars:
     nginx_ubuntu_version: ""
+    php_version: "8.1"
   roles:
     - nginx
-    #- php
+    - php

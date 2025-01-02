@@ -1,7 +1,25 @@
 ---
-- name: Install php
-  ansible.builtin.apt:
-     name: php-{{ php_version }}
-     update_cache: true
-     state: present
+- name: Add PHP repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "ppa:ondrej/php"
 
+- name: Install PHP on Ubuntu latest version
+  become: true
+  ansible.builtin.apt:
+     name: php
+     update_cache: true
+     state: latest
+  when: php_version == ""
+  notify:
+    - start php
+
+- name: Install PHP on Ubuntu spesific version
+  become: true
+  ansible.builtin.apt:
+    name: "php{{ php_version }}"
+    update_cache: true
+    state: present
+  when: php_version != ""
+  notify:
+    - start php
