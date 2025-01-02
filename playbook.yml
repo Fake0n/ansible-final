@@ -1,0 +1,7 @@
+---
+- name: Install LEMP + Init + Joomla
+  hosts: webservers
+  vars:
+    nginx_ubuntu_version: ""
+  roles:
+    - nginx
