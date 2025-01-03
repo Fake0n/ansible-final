@@ -17,12 +17,11 @@ mysql_bind_address: 'localhost'
 
 # mysql packages
 mysql_packages:
-  - mysql
   - mysql-server
-  - MySQL-python
 
+# for users.yml  
 mysql_users:
    - name: admin
      host: 127.0.0.1
      password: LNGsgS4rxC7t7KmLaP9q
-     priv: *.*:ALL
+     priv: "*.*:ALL"

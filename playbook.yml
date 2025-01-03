@@ -1,9 +1,9 @@
 ---
 - name: Install LEMP + Init + Joomla
   hosts: webservers
-  vars:
-    nginx_ubuntu_version: ""
-    php_version: "8.1"
+  #vars:
+  #  nginx_ubuntu_version: ""
+  #  php_version: "8.1"
   roles:
     - nginx
     - php

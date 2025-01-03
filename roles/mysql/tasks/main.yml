@@ -12,11 +12,19 @@
     update_cache: true
   loop: "{{mysql_packages}}"
 
-- name: started Mysql
+- name: Started Mysql
   become: true
   ansible.builtin.service:
     name: mysql
     state: started
+
+- name: Set MySQL root password
+  become: true
+  community.mysql.mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mysql_root_password }}"
+    state: present
 
 
 # Configure MySQL.
