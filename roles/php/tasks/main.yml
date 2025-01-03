@@ -11,8 +11,6 @@
      update_cache: true
      state: latest
   when: php_version == ""
-  notify:
-    - start php
 
 - name: Install PHP on Ubuntu spesific version
   become: true
@@ -21,5 +19,3 @@
     update_cache: true
     state: present
   when: php_version != ""
-  notify:
-    - start php
