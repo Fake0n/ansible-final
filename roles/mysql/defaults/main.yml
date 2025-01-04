@@ -7,10 +7,6 @@ mysql_root_password: iDaeKZDGlU5vBLsaoZvt
 # mysql version
 mysql_version: ""
 
-# Set this to `true` to forcibly update the root password.
-mysql_root_password_update: false
-mysql_user_password_update: false
-
 # MySQL connection settings.
 mysql_port: "3306"
 mysql_bind_address: 'localhost'
@@ -22,6 +18,6 @@ mysql_packages:
 # for users.yml  
 mysql_users:
    - name: admin
-     host: 127.0.0.1
+     host: localhost
      password: LNGsgS4rxC7t7KmLaP9q
      priv: "*.*:ALL"
