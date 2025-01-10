@@ -1,2 +1,5 @@
 ---
-# defaults file for joomla
+# path to joomla 5.2.3 Full Pack
+joomla_url: "https://downloads.joomla.org/cms/joomla5/5-2-3/Joomla_5-2-3-Stable-Full_Package.tar.gz?format=gz"
+# path to unzip 
+path_unzip: /var/www/sites/joomla

@@ -1,2 +1,40 @@
 ---
-# tasks file for joomla
+- name: Create DIR for joomla
+  become: true
+  ansible.builtin.file:
+    path: "{{ path_unzip }}"
+    state: directory
+    mode: '0755'
+
+- name: Download joomla
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ joomla_url }}"
+    dest: "{{ path_unzip }}/joomla.tar.gz"
+
+- name: Unarchive joomla
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ path_unzip }}/joomla.tar.gz"
+    dest: "{{ path_unzip }}"
+    remote_src: yes
+
+- name: Delete joomla archive
+  become: true
+  ansible.builtin.file:
+    path: "{{ path_unzip }}/joomla.tar.gz"
+    state: absent
+
+- name: Copy htaccess.txt to .htaccess
+  become: true
+  ansible.builtin.command:
+    cmd: "mv {{ path_unzip }}/htaccess.txt {{ path_unzip }}/.htaccess"
+
+- name: Change owner files in joomla
+  become: true
+  ansible.builtin.file:
+    path: "{{ path_unzip }}"
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    recurse: yes

@@ -29,3 +29,6 @@
 
 # Configure MySQL.
 - ansible.builtin.include_tasks: users.yml
+
+# Create DB for Joomla
+- ansible.builtin.include_tasks: db.yml
