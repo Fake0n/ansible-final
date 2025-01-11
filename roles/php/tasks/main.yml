@@ -7,7 +7,15 @@
 - name: Install PHP on Ubuntu latest version
   become: true
   ansible.builtin.apt:
-     name: php
+     name:
+      - php
+      - php8.1-mysql
+      - php-json
+      - php-mbstring
+      - php-zip
+      - php-xml
+      - php-intl
+      - php-curl
      update_cache: true
      state: latest
   when: php_version == ""
@@ -15,7 +23,15 @@
 - name: Install PHP on Ubuntu spesific version
   become: true
   ansible.builtin.apt:
-    name: "php{{ php_version }}"
+    name:
+      - "php{{ php_version }}"
+      - php8.1-mysql
+      - php-json
+      - php-mbstring
+      - php-zip
+      - php-xml
+      - php-intl
+      - php-curl
     update_cache: true
     state: present
   when: php_version != ""
