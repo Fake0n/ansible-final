@@ -25,11 +25,6 @@
     path: "{{ path_unzip }}/joomla.tar.gz"
     state: absent
 
-- name: Copy htaccess.txt to .htaccess
-  become: true
-  ansible.builtin.command:
-    cmd: "mv {{ path_unzip }}/htaccess.txt {{ path_unzip }}/.htaccess"
-
 - name: Change owner files in joomla
   become: true
   ansible.builtin.file:

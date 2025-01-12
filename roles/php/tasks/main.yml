@@ -10,12 +10,13 @@
      name:
       - php
       - php8.1-mysql
-      - php-json
-      - php-mbstring
-      - php-zip
-      - php-xml
-      - php-intl
-      - php-curl
+      - php8.1-fpm
+      - php8.1-mbstring
+      - php8.1-zip
+      - php8.1-xml
+      - php8.1-intl
+      - php8.1-curl
+      - php8.1-gd
      update_cache: true
      state: latest
   when: php_version == ""
@@ -26,12 +27,13 @@
     name:
       - "php{{ php_version }}"
       - php8.1-mysql
-      - php-json
-      - php-mbstring
-      - php-zip
-      - php-xml
-      - php-intl
-      - php-curl
+      - php8.1-fpm
+      - php8.1-mbstring
+      - php8.1-zip
+      - php8.1-xml
+      - php8.1-intl
+      - php8.1-curl
+      - php8.1-gd
     update_cache: true
     state: present
   when: php_version != ""
