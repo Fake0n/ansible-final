@@ -18,10 +18,10 @@
     name: mysql
     state: started
 
-    #- name: Set MySQL root password
-    #become: true
-    #community.mysql.mysql_user:
-    #name: root
+#- name: Set MySQL root password
+  #  become: true
+  #community.mysql.mysql_user:
+    #  name: root
     #host: localhost
     #password: "{{ mysql_root_password }}"
     #state: present

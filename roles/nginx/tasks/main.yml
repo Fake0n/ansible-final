@@ -20,10 +20,16 @@
   notify:
     - start nginx
 
-- name: Delete default nginx site
+- name: Delete default nginx sites-enabled
   become: true
   ansible.builtin.file:
     path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Delete default nginx sites-available
+  become: true
+  ansible.builtin.file:
+    path: /etc/nginx/sites-available/default
     state: absent
 
 - name: Copy joomla.conf to /etc/nginx/sites-available/
