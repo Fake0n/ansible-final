@@ -4,36 +4,17 @@
   ansible.builtin.apt_repository:
     repo: "ppa:ondrej/php"
 
-- name: Install PHP on Ubuntu latest version
+- name: Install PHP on Ubuntu
   become: true
   ansible.builtin.apt:
-     name:
-      - php
-      - php8.1-mysql
-      - php8.1-fpm
-      - php8.1-mbstring
-      - php8.1-zip
-      - php8.1-xml
-      - php8.1-intl
-      - php8.1-curl
-      - php8.1-gd
-     update_cache: true
-     state: latest
-  when: php_version == ""
-
-- name: Install PHP on Ubuntu spesific version
-  become: true
-  ansible.builtin.apt:
-    name:
-      - "php{{ php_version }}"
-      - php8.1-mysql
-      - php8.1-fpm
-      - php8.1-mbstring
-      - php8.1-zip
-      - php8.1-xml
-      - php8.1-intl
-      - php8.1-curl
-      - php8.1-gd
+    name: "{{ item }}"
     update_cache: true
     state: present
+  loop: "{{ php_packages }}"
   when: php_version != ""
+
+- name: Enabled autostart php
+  become: true
+  ansible.builtin.service:
+    name: "php{{ php_version }}"
+    enabled: yes

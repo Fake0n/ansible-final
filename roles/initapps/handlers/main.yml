@@ -1,2 +1,20 @@
 ---
-# handlers file for initapps
+# start mysql
+- name: Started Mysql
+  become: true
+  ansible.builtin.service:
+    name: mysql
+    state: started
+# start nginx
+- name: Started Nginx
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: started
+# restart nginx
+- name: Restarted Nginx
+  become: true
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+

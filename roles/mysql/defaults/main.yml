@@ -15,9 +15,4 @@ mysql_bind_address: 'localhost'
 mysql_packages:
   - mysql-server
 
-# for users.yml  
-mysql_users:
-   - name: admin
-     host: localhost
-     password: LNGsgS4rxC7t7KmLaP9q
-     priv: "*.*:ALL"
+

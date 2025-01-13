@@ -1,2 +1,11 @@
 ---
-# defaults file for initapps
+# root path for joomla files
+root_joomla: '/var/www/sites/joomla'
+# set mysql root password
+mysql_root_password: iDaeKZDGlU5vBLsaoZvt
+# for users.yml
+mysql_users:
+   - name: admin
+     host: ""
+     password: LNGsgS4rxC7t7KmLaP9q
+     priv: "*.*:ALL"

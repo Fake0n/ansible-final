@@ -1,0 +1,32 @@
+---
+- name: Delete default nginx sites-enabled
+  become: true
+  ansible.builtin.file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Delete default nginx sites-available
+  become: true
+  ansible.builtin.file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+
+- name: Copy joomla.conf to /etc/nginx/sites-available/
+  become: true
+  ansible.builtin.template:
+    src: joomla.conf.j2
+    dest: /etc/nginx/sites-available/joomla.conf
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
+- name: Create symbol link
+  become: true
+  ansible.builtin.file:
+    src: /etc/nginx/sites-available/joomla.conf
+    dest: /etc/nginx/sites-enabled/joomla.conf
+    owner: www-data
+    group: www-data
+    state: link
+  notify:
+    - restart nginx
