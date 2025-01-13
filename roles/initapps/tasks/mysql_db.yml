@@ -1,9 +1,9 @@
 ---
-- name: create database
+- name: Create database
   community.mysql.mysql_db:
     check_implicit_admin: true
-    login_user: "{{ item.name }}"
-    login_password: "{{ item.password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
     name: joomla
     state: present
   loop: "{{ mysql_users }}"

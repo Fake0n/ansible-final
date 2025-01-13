@@ -1,19 +1,19 @@
 ---
-- name: Set MySQL root password
-  community.mysql.mysql_user:
+- name: Set MySQL root user
+  mysql_user:
     name: root
     password: "{{ mysql_root_password }}"
-    state: present
-  ignore_errors: yes
+    priv: "*.*:ALL,GRANT"
+  #ignore_errors: yes
 
-- name: MySQL users are present.
-  community.mysql.mysql_user:
+- name: MySQL users
+  mysql_user:
     check_implicit_admin: true
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
     login_user: root
     login_password: "{{ mysql_root_password }}"
-    name: "{{ item.name }}"
     host: "{{ item.host | default('localhost') }}"
-    password: "{{ item.password }}"
     priv: "{{ item.priv | default('*.*:USAGE') }}"
     state: "{{ item.state | default('present') }}"
   loop: "{{ mysql_users }}"

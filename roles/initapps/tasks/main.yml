@@ -1,7 +1,7 @@
 ---
-# add mysql db for joomla
-- ansible.builtin.include_tasks: mysql_db.yml
 # add mysql users for joomla
 - ansible.builtin.include_tasks: mysql_users.yml
+# add mysql db for joomla
+- ansible.builtin.include_tasks: mysql_db.yml
 # set joomla
 - ansible.builtin.include_tasks: joomla_set.yml
