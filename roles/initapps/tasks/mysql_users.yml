@@ -1,17 +1,12 @@
 ---
-- name: Check if MySQL root password is set
-  command: "mysqladmin -u root -h localhost password status"
-  register: mysql_root_status
-  ignore_errors: true
-
-- name: Set MySQL root pasword
-  when: mysql_root_status.failed
+- name: Set MySQL root password
   community.mysql.mysql_user:
     name: root
     password: "{{ mysql_root_password }}"
+    state: present
+  ignore_errors: yes
 
 - name: MySQL users are present.
-  when: mysql_root_status is defined
   community.mysql.mysql_user:
     check_implicit_admin: true
     login_user: root
