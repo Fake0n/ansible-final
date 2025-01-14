@@ -2,9 +2,9 @@
 - name: Install LEMP + Init + Joomla
   hosts: webservers
   vars:
-    ans_host: 51.250.20.151
+    ans_host: 51.250.102.158
     ans_user: user
-    ans_password: yrxigjv
+    ans_password: azelybk
   vars_files:
     - secret.vault
   roles:

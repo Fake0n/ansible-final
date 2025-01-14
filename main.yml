@@ -1,4 +1,0 @@
-# nginx version
-nginx_ubuntu_version: ""
-# default site root
-root_joomla: '/var/www/sites/joomla'
