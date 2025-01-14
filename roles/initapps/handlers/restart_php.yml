@@ -1,5 +1,0 @@
-- name: restart php
-  become: true
-  ansible.builtin.service:
-    name: php
-    state: restarted
