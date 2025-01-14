@@ -11,13 +11,14 @@
   ansible.builtin.get_url:
     url: "{{ joomla_url }}"
     dest: "{{ path_unzip }}/joomla.tar.gz"
+    mode: '0755'
 
 - name: Unarchive joomla
   become: true
   ansible.builtin.unarchive:
     src: "{{ path_unzip }}/joomla.tar.gz"
     dest: "{{ path_unzip }}"
-    remote_src: yes
+    remote_src: true
 
 - name: Delete joomla archive
   become: true
@@ -32,4 +33,4 @@
     owner: www-data
     group: www-data
     mode: '0755'
-    recurse: yes
+    recurse: true

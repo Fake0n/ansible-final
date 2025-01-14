@@ -21,7 +21,7 @@
     mode: "0644"
     force: true
   notify:
-    - restart nginx
+    - Restart nginx
 
 - name: Create symbol link
   become: true

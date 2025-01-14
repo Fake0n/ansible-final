@@ -14,5 +14,3 @@ mysql_bind_address: 'localhost'
 # mysql packages
 mysql_packages:
   - mysql-server
-
-

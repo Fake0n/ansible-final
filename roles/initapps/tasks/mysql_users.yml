@@ -1,7 +1,7 @@
 ---
 - name: Create root password
   become: true
-  mysql_user:
+  community.mysql.mysql_user:
     name: root
     password: "{{ mysql_root_password }}"
     login_user: root

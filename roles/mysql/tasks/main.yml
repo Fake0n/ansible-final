@@ -16,4 +16,4 @@
   become: true
   ansible.builtin.service:
     name: mysql
-    enabled: yes
+    enabled: true

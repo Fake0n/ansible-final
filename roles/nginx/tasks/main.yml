@@ -5,14 +5,14 @@
     name: nginx
     state: latest
     update_cache: true
-  when: nginx_ubuntu_version == "" 
-    
+  when: nginx_ubuntu_version == ""
+
 - name: Install Nginx on Ubuntu spesific version
   become: true
   ansible.builtin.apt:
     name: "nginx={{ nginx_ubuntu_version }}"
     state: present
-    allow_downgrade: true   
+    allow_downgrade: true
     update_cache: true
   when: nginx_ubuntu_version != ""
 
@@ -20,4 +20,4 @@
   become: true
   ansible.builtin.service:
     name: nginx
-    enabled: yes
+    enabled: true

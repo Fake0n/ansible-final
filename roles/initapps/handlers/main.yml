@@ -19,14 +19,14 @@
     state: started
 
 # restart nginx
-- name: restart nginx
+- name: Restart nginx
   become: true
   ansible.builtin.service:
     name: nginx
     state: restarted
 
-# restaart php    
-- name: restart php
+# restaart php
+- name: Restart php
   become: true
   ansible.builtin.service:
     name: "php{{ php_version }}-fpm"
