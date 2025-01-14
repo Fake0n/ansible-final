@@ -6,9 +6,6 @@
   - php
 - joomla
 
-# Lint кода
-`ansible-ling playbook.yml`
-
 # Команда для запуска плейбука
 `ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-file password_vault.txt`
 
