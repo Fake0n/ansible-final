@@ -15,4 +15,5 @@ ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-
 - php 8.1
 - joomla 5.1.4
 
-# Пароль для Ansible-vault назодится в файле password_vault.txt
+# Пароль для Ansible-vaul
+Находится в файле password_vault.txt
