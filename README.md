@@ -12,6 +12,12 @@
 - php 8.1
 - joomla 5.1.4
 
+# Переменные
+## Для подключения к хосту, просто указать переменные в playbook.yml
+- ans_host:
+- ans_user:
+- ans_password
+  
 # Команда для запуска плейбука
 `ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-file password_vault.txt`
 
