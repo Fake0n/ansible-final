@@ -11,12 +11,3 @@
     name: "{{ item }}"
     update_cache: true
   loop: "{{mysql_packages}}"
-
-    #- name: Set MySQL root password
-    #become: true
-  #community.mysql.mysql_user:
-    #  name: root
-    #host: localhost
-    #password: "{{ mysql_root_password }}"
-    #state: present
-

@@ -1,16 +1,22 @@
----
 # start mysql
 - name: Started Mysql
   become: true
   ansible.builtin.service:
     name: mysql
     state: started
+# restart mysql
+- name: Restarted Mysql
+  ansible.builtin.service:
+    name: mysql
+    state: restarted
+
 # start nginx
 - name: Started Nginx
   become: true
   ansible.builtin.service:
     name: nginx
     state: started
+
 # restart nginx
 - name: Restarted Nginx
   become: true
@@ -18,3 +24,9 @@
     name: nginx
     state: restarted
 
+# restaart php    
+- name: restart php
+  become: true
+  ansible.builtin.service:
+    name: "php{{ php_version }}-fpm"
+    state: restarted
