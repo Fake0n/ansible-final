@@ -5,6 +5,7 @@
   - mysql
   - php
   - joomla
+  - initapps
 
 # Версии используемых сервисов
 - nginx 1.18.0
