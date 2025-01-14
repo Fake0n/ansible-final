@@ -6,20 +6,20 @@
   - php
   - joomla
 
-# Версии используемых сервисов
+# Версии используемых сервисов:
 - nginx 1.18.0
 - mysql-server-8.0.40-0ubuntu0.20.04.1
 - php 8.1
 - joomla 5.1.4
 
 # Переменные
-## Для подключения к хосту, просто указать переменные в playbook.yml
+## Для подключения к хосту, просто указать значения переменных в playbook.yml:
 - ans_host:
 - ans_user:
 - ans_password
   
-# Команда для запуска плейбука
+# Команда для запуска плейбука:
 `ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-file password_vault.txt`
 
-# Пароль для Ansible-vaul
+# Пароль для Ansible-vaul:
 Находится в файле password_vault.txt
