@@ -3,7 +3,7 @@ all:
     webservers:
       hosts:
         web01:
-          ansible_host: 192.168.2.24
-          ansible_user: user
-          ansible_password: babaika
+          ansible_host: {{ ans_host }}
+          ansible_user: {{ ans_user }}
+          ansible_password: {{ ans_password }}
           ansible_become_password: babaika
