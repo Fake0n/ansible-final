@@ -7,7 +7,7 @@
 - joomla
 
 # Команда для запуска плейбука
-ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-file password_vault.txt
+`ansible-playbook -i inventory.yml playbook.yml -e secret.vault --vault-password-file password_vault.txt`
 
 # Версии используемых сервисов
 - nginx 1.18.0
