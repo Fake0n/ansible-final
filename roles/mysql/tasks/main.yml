@@ -10,4 +10,10 @@
   ansible.builtin.apt:
     name: "{{ item }}"
     update_cache: true
-  loop: "{{mysql_packages}}"
+  loop: "{{ mysql_packages }}"
+
+- name: Enabled autostart Mysql
+  become: true
+  ansible.builtin.service:
+    name: mysql
+    enabled: yes

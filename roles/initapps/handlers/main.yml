@@ -4,6 +4,7 @@
   ansible.builtin.service:
     name: mysql
     state: started
+
 # restart mysql
 - name: Restarted Mysql
   ansible.builtin.service:
@@ -18,7 +19,7 @@
     state: started
 
 # restart nginx
-- name: Restarted Nginx
+- name: restart nginx
   become: true
   ansible.builtin.service:
     name: nginx

@@ -19,6 +19,9 @@
     owner: www-data
     group: www-data
     mode: "0644"
+    force: true
+  notify:
+    - restart nginx
 
 - name: Create symbol link
   become: true
@@ -28,5 +31,3 @@
     owner: www-data
     group: www-data
     state: link
-  notify:
-    - Restarted Nginx

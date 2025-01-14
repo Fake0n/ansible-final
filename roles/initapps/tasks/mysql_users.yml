@@ -6,6 +6,7 @@
     password: "{{ mysql_root_password }}"
     login_user: root
     login_password: "{{ mysql_root_password }}"
+  no_log: true
 
 - name: MySQL users are present.
   become: true
@@ -19,5 +20,4 @@
     priv: "{{ item.priv | default('*.*:USAGE') }}"
     state: "{{ item.state | default('present') }}"
   loop: "{{ mysql_users }}"
-  notify: 
-    - Restarted Mysql
+  no_log: true

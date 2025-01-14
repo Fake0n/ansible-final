@@ -7,3 +7,4 @@
     name: joomla
     state: present
   loop: "{{ mysql_users }}"
+  no_log: true
