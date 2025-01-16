@@ -23,3 +23,4 @@
 
 # Пароль для Ansible-vaul:
 Находится в файле password_vault.txt
+### В Ansible-vaul находятся пароли к mysql пользователя root и admin.
